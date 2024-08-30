@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <style>
+    body {
+        font-family: 'Poppins', sans-serif;
+        color: #fff;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        height: 100vh;
+        margin: auto;
+        font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+        overflow: auto;
+        background: linear-gradient(315deg, rgb(199, 199, 199) 3%, rgb(58, 60, 62) 38%, rgb(66, 67, 66) 68%, rgb(52, 47, 47) 98%);
+        animation: gradient 15s ease infinite;
+        background-size: 400% 400%;
+        background-attachment: fixed;
+    }
+    @keyframes gradient {
+    0% {
+        background-position: 0% 0%;
+    }
+    50% {
+        background-position: 100% 100%;
+    }
+    100% {
+        background-position: 0% 0%;
+    }
+}
+
+.wave {
+    background: rgba(0, 0, 0, 0.25);
+    border-radius: 1000% 1000% 0 0;
+    position: fixed;
+    width: 200%;
+    height: 12em;
+    animation: wave 10s -3s linear infinite;
+    transform: translate3d(0, 0, 0);
+    opacity: 0.8;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+}
+
+.wave:nth-of-type(2) {
+    bottom: -1.25em;
+    animation: wave 18s linear reverse infinite;
+    opacity: 0.8;
+}
+
+.wave:nth-of-type(3) {
+    bottom: -2.5em;
+    animation: wave 20s -1s reverse infinite;
+    opacity: 0.9;
+}
+
+@keyframes wave {
+    2% {
+        transform: translateX(1);
+    }
+
+    25% {
+        transform: translateX(-25%);
+    }
+
+    50% {
+        transform: translateX(-50%);
+    }
+
+    75% {
+        transform: translateX(-25%);
+    }
+
+    100% {
+        transform: translateX(1);
+    }
+}
+
+        @font-face {
+            font-family: 'Satoshi-Bold';
+            src: url('/fonts/Satoshi-Bold.woff2') format('woff2'),
+                url('/fonts/Satoshi-Bold.woff') format('woff'),
+                url('/fonts/Satoshi-Bold.ttf') format('truetype');
+            font-weight: 700;
+            font-display: swap;
+            font-style: normal;
+        }
+        @keyframes gradientMove {
+            0% {
+                background-position: 0% 0%;
+            }
+            25% {
+                background-position: 100% 0%;
+            }
+            50% {
+                background-position: 0% 100%;
+            }
+            75% {
+                background-position: 100% 100%;
+            }
+            100% {
+                background-position: 0% 0%;
+            }
+        }
+        .h1-color {
+            background: linear-gradient(90deg, #ffcc00, #ff6600); /* Darker colors */
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent;
+            font-family: 'Satoshi-Bold', sans-serif; /* Apply Tanker-Regular font */
+            font-weight: bold; /* Ensure text is bold */
+            font-size: 4rem; /* Adjust as needed for impact */
+            /*letter-spacing: 0.1em; /* Adjust letter spacing as needed */
+            animation: gradientMove 6s ease infinite; /* Adjust duration and easing as needed */
+        }
+        .container {
+            width: 80%;
+            margin: 20px auto;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+        .header, .news-section, .search-section {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 10px;
+            margin-bottom: 10px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            transition: transform 0.3s ease;
+            font-family: "Kanit", sans-serif;
+            font-weight: 700;
+            font-style: normal;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+        }
+        .header div {
+            flex: 1;
+            margin: 0 5px;
+            cursor: pointer;
+        }
+        .header div {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .header div:hover {
+            transform: translateY(-3px); /* Moves the element up */
+            color: #ffcc00
+        }
+
+        .general-news, .company-news, .index-news {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 1.5em;
+            font-weight: 600;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s ease;
+            font-family: "Kanit", sans-serif;
+            font-weight: 700;
+            font-style: normal;
+        }
+        .news-section, .search-section {
+            display: none;
+        }
+        .company-news, .index-news, .search-stocks {
+            display: inline-block;
+            width: 48%;
+            vertical-align: top;
+            border-radius: 15px;
+            transition: transform 0.3s ease;
+        }
+        .company-news {
+            margin-right: 2%;
+        }
+        .news-item, .stock-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            transition: transform 0.3s ease;
+        }
+        .news-item:last-child, .stock-item:last-child {
+            border-bottom: none;
+        }
+        a {
+            color: #ffffff;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .impact-widget, .follow-text {
+            color: red;
+        }
+        .trend {
+            color: red;
+        }
+        .impact-widget.green, .follow-text.green {
+            color: #27ae60;
+        }
+        .follow-button {
+            background-color: #4ca1af;
+            border: none;
+            color: white;
+            padding: 8px 16px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+            font-weight: 600;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+        }
+        .follow-button:hover {
+            background-color: #367f93;
+            transform: scale(1.05);
+        }
+        .follow-button:active {
+            background-color: #275e6b;
+            transform: scale(1.02);
+        }
+        .search-stocks,.news-section {
+        max-height: 300px; /* Set the maximum height for the container */
+        overflow-y: auto;  /* Enable vertical scrolling */
+        padding-right: 10px; /* Add padding to prevent content from hiding behind the scrollbar */
+        }
+
+    </style>
+</head>
+<body>
+    <div>
+        <div class="wave"></div>
+        <div class="wave"></div>
+        <div class="wave"></div>
+     </div>
+    <h1 class="h1-color">StockPulse: AI-Driven News Impact Screener</h1>
+    <div class="container">
+        <div class="header">
+            <div onclick="showSection('home')">HOME</div>
+            <div onclick="showSection('search')">SEARCH FOR STOCKS</div>
+            <div onclick="showSection('stocks')">FOLLOWING STOCKS</div>
+            <div onclick="showSection('indices')">FOLLOWING INDICES</div>
+        </div>
+
+        <div class="general-news" id="home-section">
+            <h1>GENERAL NEWS FEED</h1>
+            <div><a href="https://www.cnbctv18.com/market/stock-market-live-updates-nifty-50-sensex-today-hdfc-bank-ril-cdsl-spicejet-prestige-estates-share-price-liveblog-19468042.htm">Sensex Today | Stock Market LIVE Updates: Nifty 50 above 24,200, led by Bharti Airtel, HDFC Bank</a></div><br>
+            <div><a href="https://www.cnbc.com/2024/08/30/asia-pacific-markets-mostly-set-for-stronger-open-after-us-data-calms-recessionary-fears.html">Asia markets climb as U.S. jobless and GDP numbers calm recessionary fears; investors assess Japan data</a></div><br>
+            <div><a href="https://www.cnbc.com/2024/08/29/intel-intc-gelsinger-skepticism-activist-layoffs.html">Intel CEO Gelsinger says he respects ‘skepticism’ from investors as chipmaker’s struggles persist</a></div><br>
+            <div><a href="https://www.cnbctv18.com/market/hindustan-oil-exploration-company-share-price-gains-on-activation-of-wells-19468151.htm">Hindustan Oil Exploration Company gains nearly 6% on activation of wells in Block B-80 field</a></div><br>
+            <div><a href="https://www.cnbctv18.com/business/companies/nvidia-discusses-joining-openai-latest-funding-round-19468199.htm">Nvidia discusses joining OpenAI’s latest funding round</a></div><br>
+
+        </div>
+
+        <div class="news-section" id="stocks-section">
+            <div class="company-news">
+                <div id="following-stocks-list">
+                    <!-- Followed stocks will appear here -->
+                </div>
+            </div>
+        </div>
+
+        <div class="news-section" id="indices-section">
+            <div class="index-news">
+                <div class="news-item">
+                    <div>INDEX 1</div>
+                    <div><a href="#">NEWS FEED LINK</a></div>
+                    <div class="trend">TREND</div>
+                </div>
+                <div class="news-item">
+                    <div>INDEX 2</div>
+                    <div><a href="#">NEWS FEED LINK</a></div>
+                    <div class="trend">TREND</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="search-section" id="search-section">
+            <div class="search-stocks">
+                <div class="stock-item">
+                    <div>Reliance Industries Ltd.</div>
+                    <div><button class="follow-button" onclick="followStock(this, 'Reliance Industries Ltd.')">Follow</button></div>
+                </div>
+                <div class="stock-item">
+                    <div>Tata Consultancy Services Ltd. (TCS)</div>
+                    <div><button class="follow-button" onclick="followStock(this, 'Tata Consultancy Services Ltd.')">Follow</button></div>
+                </div>
+                <div class="stock-item">
+                    <div>Infosys Ltd.</div>
+                    <div><button class="follow-button" onclick="followStock(this, 'Infosys Ltd.')">Follow</button></div>
+                </div>
+                <div class="stock-item">
+                    <div>HDFC Bank Ltd.</div>
+                    <div><button class="follow-button" onclick="followStock(this, 'HDFC Bank Ltd.')">Follow</button></div>
+                </div>
+                <div class="stock-item">
+                    <div>Bharti Airtel Ltd.</div>
+                    <div><button class="follow-button" onclick="followStock(this, 'Bharti Airtel Ltd.')">Follow</button></div>
+                </div>
+                <div class="stock-item">
+                    <div>Apple Inc.</div>
+                    <div><button class="follow-button" onclick="followStock(this, 'Apple Inc.')">Follow</button></div>
+                </div>
+                <div class="stock-item">
+                    <div>Microsoft Corporation</div>
+                    <div><button class="follow-button" onclick="followStock(this, 'Microsoft Corporation')">Follow</button></div>
+                </div>
+                <div class="stock-item">
+                    <div>Amazon.com Inc.</div>
+                    <div><button class="follow-button" onclick="followStock(this, 'Amazon.com Inc.')">Follow</button></div>
+                </div>
+                <div class="stock-item">
+                    <div>Alphabet Inc.</div>
+                    <div><button class="follow-button" onclick="followStock(this, 'Alphabet Inc.')">Follow</button></div>
+                </div>
+                <div class="stock-item">
+                    <div>Tesla Inc.</div>
+                    <div><button class="follow-button" onclick="followStock(this, 'Tesla Inc.')">Follow</button></div>
+                </div>
+            </div>
+        </div>
+        
+        
+    </div>
+
+    <script>
+        function showSection(section) {
+            // Hide all sections
+            document.getElementById('home-section').style.display = 'none';
+            document.getElementById('stocks-section').style.display = 'none';
+            document.getElementById('indices-section').style.display = 'none';
+            document.getElementById('search-section').style.display = 'none';
+
+            // Show the selected section
+            document.getElementById(section + '-section').style.display = 'block';
+        }
+
+        // Show the Home section by default
+        showSection('home');
+
+        function followStock(button, stockName) {
+            const followingStocksList = document.getElementById('following-stocks-list');
+
+            // Check if the stock is already followed
+            let followedStock = document.getElementById('followed-' + stockName);
+            if (!followedStock) {
+                // Create a new div for the followed stock
+                followedStock = document.createElement('div');
+                followedStock.className = 'news-item';
+                followedStock.id = 'followed-' + stockName;
+                followedStock.innerHTML = `
+                    <div>${stockName}</div>
+                    <div><a href="#">NEWS FEED LINK</a></div>
+                    <div class="impact-widget">Impact Widget</div>
+                `;
+                followingStocksList.appendChild(followedStock);
+
+                // Update button text
+                button.innerText = "Following";
+                button.classList.add('following');
+            } else {
+                // Unfollow the stock
+                followingStocksList.removeChild(followedStock);
+
+                // Update button text
+                button.innerText = "Follow";
+                button.classList.remove('following');
+            }
+        }
+    </script>
+</body>
+</html>
